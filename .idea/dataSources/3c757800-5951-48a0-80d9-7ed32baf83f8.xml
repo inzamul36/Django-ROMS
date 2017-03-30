@@ -423,14 +423,18 @@ model</columns>
       <mandatory>1</mandatory>
       <data-type>INTEGER(0,-1)|4</data-type>
     </column>
-    <key id="101" parent="13">
+    <column id="101" parent="13" name="active">
+      <mandatory>1</mandatory>
+      <data-type>INTEGER(0,-1)|4</data-type>
+    </column>
+    <key id="102" parent="13">
       <columns>id</columns>
       <primary>1</primary>
     </key>
-    <column id="102" parent="14" name="name">
+    <column id="103" parent="14" name="name">
       <data-type>(0,-1)|12</data-type>
     </column>
-    <column id="103" parent="14" name="seq">
+    <column id="104" parent="14" name="seq">
       <data-type>(0,-1)|12</data-type>
     </column>
   </database-model>

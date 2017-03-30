@@ -57,7 +57,7 @@ def destroy(request, order_id):
 
 @login_required
 def index_product(request):
-    products = Product.objects.all()
+    products = Product.objects.filter(active='1')
     return render(request, 'index_product.html', {'products': products})    
 
 @login_required
@@ -77,11 +77,16 @@ def new_product(request):
 
 @login_required
 def destroy_product(request, product_id):
-    order = Order.objects.filter(product_id=product_id).count()
+    #order = Order.objects.filter(product_id=product_id).count()
 
-    if order > 0:
-         return redirect('/products', messages.success(request, 'Cannot delete product while its order exists.', 'alert-danger'))    
+    #if order > 0:
+    #     return redirect('/products', messages.success(request, 'Cannot delete product while its order exists.', 'alert-danger'))    
+    #else:
+    #    product = Product.objects.get(id=product_id)
+    #    product.delete()
+    #    return redirect('/products', messages.success(request, 'Product was successfully deleted.', 'alert-success'))      
+
+    if Product.objects.filter(id=product_id).update(active='0'):
+        return redirect('/products', messages.success(request, 'Product was successfully deleted.', 'alert-success'))  
     else:
-        product = Product.objects.get(id=product_id)
-        product.delete()
-        return redirect('/products', messages.success(request, 'Product was successfully deleted.', 'alert-success'))        
+        return redirect('/products', messages.danger(request, 'Cannot delete product while its order exists.', 'alert-danger'))  

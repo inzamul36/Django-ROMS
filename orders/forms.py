@@ -18,7 +18,7 @@ class OrderForm(ModelForm):
     )
     order_status = forms.TypedChoiceField(required=False, choices=OPTIONS2, widget=forms.RadioSelect)
     payment_option = forms.ChoiceField(choices=OPTIONS)
-    product_id = forms.ModelChoiceField(queryset=Product.objects.all(), empty_label='')
+    product_id = forms.ModelChoiceField(queryset=Product.objects.filter(active='1'), empty_label='')
     delivery_date = forms.DateField(required=True)
     quantity = forms.IntegerField(initial=1)
 
